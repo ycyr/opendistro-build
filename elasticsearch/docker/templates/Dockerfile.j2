@@ -63,20 +63,29 @@ RUN set -ex && for esdirs in config data logs; do \
     done
 
 # Install the required modules
-RUN for plugin_path in {{ plugin_url_paths }}; do \
-      elasticsearch-plugin install --batch "{{ artifact_repo_url }}/elasticsearch-plugins/$plugin_path"; \
-    done
+#RUN for plugin_path in {{ plugin_url_paths }}; do \
+#      elasticsearch-plugin install --batch "{{ artifact_repo_url }}/elasticsearch-plugins/$plugin_path"; \
+#    done
 
 # Make the certificate installer script executable. This script has to be executed before ES is started.
-RUN chmod +x /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh
+#RUN chmod +x /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh
 
 COPY --chown=1000:0 elasticsearch.yml log4j2.properties config/
+
+COPY --chown=1000:0 performance-analyzer-rca-1.0.0-SNAPSHOT.zip config/ 
+
+COPY --chown=1000:0 opendistro_performance_analyzer-1.2.0.0-SNAPSHOT.zip /tmp/
+
+RUN elasticsearch-plugin install --batch file:///tmp/opendistro_performance_analyzer-1.2.0.0-SNAPSHOT.zip; \
+        rm /tmp/opendistro_performance_analyzer-1.2.0.0-SNAPSHOT.zip 
 
 USER 0
 
 # Set gid to 0 for opendistroforelasticsearch and make group permission similar to that of user
 RUN chown -R elasticsearch:0 . && \
     chmod -R g=u /usr/share/elasticsearch
+
+RUN unzip config/performance-analyzer-rca-1.0.0-SNAPSHOT.zip
 
 RUN chmod 755 /usr/share/elasticsearch/plugins/opendistro_performance_analyzer/pa_bin/performance-analyzer-agent
 RUN chmod -R 755 /dev/shm

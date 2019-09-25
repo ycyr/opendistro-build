@@ -50,7 +50,12 @@ DOCKER_COMPOSE := docker-compose \
 	-f docker-compose.yml \
 	-f docker-compose.hostports.yml
 
-.PHONY: all dockerfile docker-compose test test-build lint clean pristine run run-single run-cluster build release-manager push
+.PHONY: all dockerfile docker-compose test test-build lint clean pristine run run-single run-cluster build release-manager push copy-pa
+
+
+copy-pa:
+	cp /Users/adithyac/healthservice/performance-analyzer-rca/build/distributions/performance-analyzer-rca-1.0.0-SNAPSHOT.zip build/elasticsearch
+	cp /Users/adithyac/healthservice/opendistro-elasticsearch-performanceanalyzer/build/distributions/opendistro_performance_analyzer-1.2.0.0-SNAPSHOT.zip build/elasticsearch
 
 # Default target, build *and* run tests
 all: build test
@@ -105,7 +110,7 @@ run-single: docker-compose
 run-cluster: docker-compose
 	DATA_VOLUME1=esdata1 DATA_VOLUME2=esdata2 $(DOCKER_COMPOSE) -f docker-compose.cluster.yml up elasticsearch1 elasticsearch2
 
-build: clean venv dockerfile docker-compose
+build: clean venv copy-pa dockerfile docker-compose
 	-pyfiglet -f puffy -w 160 "Building "; \
 	docker build -t $(IMAGE_TAG):$(OPENDISTRO_VERSION) -f build/elasticsearch/Dockerfile build/elasticsearch || \
 	docker tag $(IMAGE_TAG):$(OPENDISTRO_VERSION) $(IMAGE_TAG):$(OPENDISTRO_VERSION)
