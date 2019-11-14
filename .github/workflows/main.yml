@@ -6,8 +6,8 @@ on:
       - actions-branch
 jobs:
   build:
-    name: Create Docker Conrainer
-    runs-on: ubuntu-16.04
+    name: Create Docker Container
+    runs-on: macOS-10.14
 
     steps:
     - uses: actions/checkout@v1
