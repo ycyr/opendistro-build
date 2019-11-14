@@ -5,14 +5,14 @@ on:
     branches: 
       - actions-branch
 jobs:
-  build:
-    name: Create Docker Container
+  install-docker:
+    name: Install Docker in MacOs and Build Image
     runs-on: macOS-10.14
-
     steps:
     - uses: actions/checkout@v1
     - name: Print present working directory
       run: |
+        brew install docker
         work_dir=`pwd`
         echo $work_dir
         cd elasticsearch/docker
