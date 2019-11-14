@@ -13,7 +13,7 @@ jobs:
     - name: Print present working directory
       run: |
         sudo apt-get install python3-venv
-        pip install --upgrade pip
+        pip install virtualenv
         pip install wheel
         work_dir=`pwd`
         echo $work_dir
