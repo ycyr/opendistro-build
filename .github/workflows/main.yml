@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches: 
-      - sngri-actions-test
+      - actions-branch
 jobs:
   build:
     name: Create Docker Conrainer
@@ -11,9 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
+    - name: Print present working directory
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        work_dir=`pwd`
+        echo $pwd
