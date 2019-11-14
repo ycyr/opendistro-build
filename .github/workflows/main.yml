@@ -13,7 +13,8 @@ jobs:
     - name: Print present working directory
       run: |
         sudo apt-get install python3-venv
-        pip install wheel
+        pip3 install --upgrade pip3 wheel
+        pip3 install wheel
         work_dir=`pwd`
         echo $work_dir
         cd elasticsearch/docker
