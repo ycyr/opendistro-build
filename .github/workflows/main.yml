@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Print present working directory
       run: |
+        sudo apt install python3.6-venv
         work_dir=`pwd`
         echo $work_dir
         cd elasticsearch/docker
