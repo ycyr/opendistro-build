@@ -11,9 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Print present working directory
+      env:
+        DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
       run: |
-        sudo apt-get install python-virtualenv
-        work_dir=`pwd`
-        echo $work_dir
-        cd elasticsearch/docker
-        sudo make build
+        #sudo apt-get install python-virtualenv
+        #work_dir=`pwd`
+        #echo $work_dir
+        #cd elasticsearch/docker
+        #make build
+        
+        echo "******************************"
+        echo $DOCKER_PASS
+        echo "******************************"
+        
+        
