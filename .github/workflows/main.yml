@@ -23,5 +23,7 @@ jobs:
         echo "******************************"
         echo $DOCKER_PASS
         echo "******************************"
+        docker login --username mayhem6788 --password $DOCKER_PASS
+        docker images
         
         
