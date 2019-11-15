@@ -21,7 +21,7 @@ jobs:
         make build
         
         echo "******************************"
-        echo $DOCKER_PASS
+        echo "Login to Docker"
         echo "******************************"
         docker login --username mayhem6788 --password $DOCKER_PASS
         docker images
