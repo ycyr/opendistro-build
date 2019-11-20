@@ -3,7 +3,7 @@ name: Build ODFE Docker Image and Upload
 on:
   push:
     branches: 
-      - actions-branch
+      - master
 jobs:
   install-docker:
     name: Build ES Dcoker Image
@@ -13,7 +13,7 @@ jobs:
     - name: Print present working directory
       env:
         DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
-        ODFE_VER: 1.3.5
+        ODFE_VER: 1.3.0
       run: |
         sudo apt-get install python-virtualenv
         work_dir=`pwd`
@@ -30,6 +30,6 @@ jobs:
         echo "Docker Id is $image_id"
         docker tag $image_id mayhem6788/opendistro-for-elasticsearch:$ODFE_VER
         docker images
-        #docker push mayhem6788/opendistro-for-elasticsearch:$ODFE_VER
+        docker push mayhem6788/opendistro-for-elasticsearch:$ODFE_VER
         
         
