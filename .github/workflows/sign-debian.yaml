@@ -30,4 +30,7 @@ jobs:
         
         mkdir -p downloads/debs
         aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs downloads/debs
+        ls -ltr downloads/debs/
+        aptly repo create -distribution=stable -component=main odfe-release
+        aptly repo list
         
