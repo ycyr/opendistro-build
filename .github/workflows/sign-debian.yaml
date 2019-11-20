@@ -25,4 +25,9 @@ jobs:
         sudo apt install gpgv1
         alias gpg=gpg1
         sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-keys ED75B5A4483DA07C
+        sudo apt-get update
+        sudo apt-get install aptly
+        
+        mkdir -p downloads/debs
+        aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs downloads/debs
         
