@@ -1,0 +1,28 @@
+name: Sign Debian
+
+on:
+  push:
+    branches: 
+      - actions-branch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Sign deb
+      run: |
+        echo `pwd`
+        echo "deb http://repo.aptly.info/ squeeze main" | sudo tee -a /etc/apt/sources.list.d/aptly.list
+        sudo apt-get install gnupg1
+        sudo apt install gpgv1
+        alias gpg=gpg1
+        sudo apt-key adv --keyserver pool.sks-keyservers.net --recv-keys ED75B5A4483DA07C
+        
