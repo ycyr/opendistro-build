@@ -5,15 +5,15 @@ on:
     branches: 
       - actions-branch
 jobs:
-  install-docker:
+  build-es-docker:
     name: Build ES Dcoker Image
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
-    - name: Print present working directory
+    - name: Starting ES Build
       env:
         DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
-        ODFE_VER: 1.3.0
+        ODFE_VER: 1.2.2
       run: |
         sudo apt-get install python-virtualenv
         work_dir=`pwd`
@@ -31,5 +31,36 @@ jobs:
         docker tag $image_id mayhem6788/opendistro-for-elasticsearch:$ODFE_VER
         docker images
         docker push mayhem6788/opendistro-for-elasticsearch:$ODFE_VER
+  
+  build-kibana-docker:
+    needs: [build-es-docker]
+    name: Build Kibana Docker
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Starting Kibana Build
+        env:
+          DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+          ODFE_VER: 1.2.2
+        run: |
+          sudo apt-get install python-virtualenv
+          cd kibana/docker
+          make build
+          
+          echo "******************************"
+          echo "Uploading Kibana Docker"
+          echo "******************************"
+          docker login --username mayhem6788 --password $DOCKER_PASS
+          docker images|grep "amazon/opendistro-for-elasticsearch-kibana" > kibana_id.out
+          kibana_image_id=`awk -F' ' '{print $3}' kibana_id.out`
+          echo "Docker Id is $kibana_image_id"
+          docker tag $kibana_image_id mayhem6788/opendistro-for-elasticsearch-kibana:$ODFE_VER
+          docker push mayhem6788/opendistro-for-elasticsearch-kibana:$ODFE_VER
+          
+          
+          
+    
+          
         
+          
         
