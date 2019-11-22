@@ -3,7 +3,7 @@ name: Sign Debian
 on:
   push:
     branches: 
-      - 1.2.1
+      - actions-branch
 
 jobs:
   build:
