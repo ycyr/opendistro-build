@@ -18,6 +18,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
     - name: Sign deb
+      env:
+        PGP-PUBLIC-KEY: ${{ secrets.PGP_PUBLIC_KEY }}
+        PGP-PRIVATE-KEY: ${{ secrets.PGP_PRIVATE_KEY }}
       run: |
         echo `pwd`
         echo "deb http://repo.aptly.info/ squeeze main" | sudo tee -a /etc/apt/sources.list.d/aptly.list
@@ -28,17 +31,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install aptly
         
-        mkdir -p downloads/debs
-        aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs downloads/debs
-        ls -ltr downloads/debs/
-        aptly repo create -distribution=stable -component=main odfe-release
-        aptly repo list
-        aptly repo add odfe-release downloads
-        aptly repo show -with-packages odfe-release
-        aptly snapshot create opendistroforelasticsearch-1.3.0 from repo odfe-release
-        aptly snapshot list
-        gpg1 --import pgp-public-key
-        gpg1 --allow-secret-key-import --import pgp-private-key
-        aptly publish snapshot opendistroforelasticsearch-1.3.0
-        aws s3 sync ~/.aptly/public/ s3://artifacts.opendistroforelasticsearch.amazon.com/staging/apt
-        aws cloudfront create-invalidation --distribution-id E1VG5HMIWI4SA2 —paths "/staging/apt/*"
+        #mkdir -p downloads/debs
+        #aws s3 sync s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs downloads/debs
+        #ls -ltr downloads/debs/
+        #aptly repo create -distribution=stable -component=main odfe-release
+        #aptly repo list
+        #aptly repo add odfe-release downloads
+        #aptly repo show -with-packages odfe-release
+        #aptly snapshot create opendistroforelasticsearch-1.3.0 from repo odfe-release
+        #aptly snapshot list
+        gpg1 --import $PGP-PUBLIC-KEY
+        gpg1 --allow-secret-key-import --import $PGP-PRIVATE-KEY
+        #aptly publish snapshot opendistroforelasticsearch-1.3.0
+        #aws s3 sync ~/.aptly/public/ s3://artifacts.opendistroforelasticsearch.amazon.com/staging/apt
+        #aws cloudfront create-invalidation --distribution-id E1VG5HMIWI4SA2 —paths "/staging/apt/*"
