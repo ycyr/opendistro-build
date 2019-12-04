@@ -59,7 +59,7 @@ echo "installing open distro plugins"
 for plugin in $PLUGINS
 do
   echo "installing $plugin"
-  bin/kibana-plugin install "$ARTIFACTS_URL/downloads/kibana-plugins/$plugin"
+  bin/kibana-plugin --allow-root install "$ARTIFACTS_URL/downloads/kibana-plugins/$plugin"
 done
 # Navigate to root directory
 cd ..
