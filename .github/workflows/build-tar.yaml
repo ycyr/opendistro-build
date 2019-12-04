@@ -8,8 +8,8 @@ jobs:
   build-es-artifacts:
     name: Build ES Artifacts
     runs-on: ubuntu-latest
-    #container:
-      #image: opendistroforelasticsearch/multijava08101112-git:v1
+    container:
+      image: opendistroforelasticsearch/multijava08101112-git:v1
 
     steps:
     - uses: actions/checkout@v1
@@ -28,7 +28,7 @@ jobs:
         export PATH=$JAVA_HOME:$PATH
         cd elasticsearch/linux_distributions
         #./gradlew buildDeb buildRpm --console=plain -Dbuild.snapshot=false -b ./build.gradle
-        #./opendistro-tar-build.sh
+        ./opendistro-tar-build.sh
         #tar_artifact=`ls tarfiles/*.tar.gz`
         #tar_checksum_artifact=`ls tarfiles/*.tar.gz.sha512`
         #rpm_artifact=`ls build/distributions/*.rpm`
