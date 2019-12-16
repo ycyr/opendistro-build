@@ -54,8 +54,8 @@ DOCKER_COMPOSE := docker-compose \
 
 
 copy-pa:
-	cp /Users/adithyac/healthservice/performance-analyzer-rca/build/distributions/performance-analyzer-rca-1.0.0-SNAPSHOT.zip build/elasticsearch
-	cp /Users/adithyac/healthservice/opendistro-elasticsearch-performanceanalyzer/build/distributions/opendistro_performance_analyzer-1.2.0.0-SNAPSHOT.zip build/elasticsearch
+	cp /Users/kkumargu/code/oss/performance-analyzer-rca/build/distributions/performance-analyzer-rca-1.3.0-SNAPSHOT.zip build/elasticsearch/performance-analyzer-rca.zip
+	cp /Users/kkumargu/code/oss/performance-analyzer/build/distributions/opendistro_performance_analyzer-1.3.0.0-SNAPSHOT.zip build/elasticsearch
 
 # Default target, build *and* run tests
 all: build test
@@ -159,4 +159,4 @@ docker-compose: venv templates/docker-compose.yml.j2 templates/docker-compose-fr
 	  -D version_tag='$(OPENDISTRO_VERSION)' \
 	  templates/docker-compose.yml.j2 > docker-compose.yml; \
 	jinja2 \
-	  templates/docker-compose-fragment.yml.j2 > tests/docker-compose.yml; 
+	templates/docker-compose-fragment.yml.j2 > tests/docker-compose.yml; 
