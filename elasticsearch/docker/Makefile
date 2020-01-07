@@ -54,7 +54,7 @@ DOCKER_COMPOSE := docker-compose \
 
 
 copy-pa:
-	cp /Users/kkumargu/code/oss/performance-analyzer-rca/build/distributions/performance-analyzer-rca-1.3.0-SNAPSHOT.zip build/elasticsearch/performance-analyzer-rca.zip
+	cp /Users/kkumargu/code/oss/performance-analyzer-rca/build/distributions/performance-analyzer-rca.zip build/elasticsearch/performance-analyzer-rca.zip
 	cp /Users/kkumargu/code/oss/performance-analyzer/build/distributions/opendistro_performance_analyzer-1.3.0.0-SNAPSHOT.zip build/elasticsearch
 
 # Default target, build *and* run tests
