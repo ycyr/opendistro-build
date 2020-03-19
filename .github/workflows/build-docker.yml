@@ -181,5 +181,71 @@ jobs:
           
           sleep 45
           ../gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
-           
-    
+          
+  Test-SQL-Plugin:
+    needs: [build-es-docker]
+    name: Test SQL Plugin
+    runs-on: [ubuntu-16.04]
+    strategy:
+      matrix:
+        java: [12]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
+        with:
+          repository: opendistro-for-elasticsearch/sql
+          ref: master
+      - name: Set Up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Test SQL Plugin
+        run: |
+          cd elasticsearch/linux_distributions
+          es_version=`../bin/version-info --es`
+          echo $es_version
+          cd ../../..
+          cd sql
+          sleep 10
+          echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:$es_version" >> Dockerfile
+          echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
+          
+          docker build -t odfe-http:no-security .
+          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:no-security
+          
+          sleep 45
+          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          
+  Test-KNN-Plugin:
+    needs: [build-es-docker]
+    name: Test KNN Plugin
+    runs-on: [ubuntu-16.04]
+    strategy:
+      matrix:
+        java: [12]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/checkout@v1
+        with:
+          repository: opendistro-for-elasticsearch/k-NN
+          ref: master
+      - name: Set Up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+      - name: Test k-NN Plugin
+        run: |
+          cd elasticsearch/linux_distributions
+          es_version=`../bin/version-info --es`
+          echo $es_version
+          cd ../../..
+          cd k-NN
+          sleep 10
+          echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:$es_version" >> Dockerfile
+          echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
+          
+          docker build -t odfe-http:no-security .
+          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:no-security
+          
+          sleep 45
+          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
