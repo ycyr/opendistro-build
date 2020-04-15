@@ -24,7 +24,9 @@ jobs:
         ES_VERSION=$(../bin/version-info --es)
         OD_VERSION=$(../bin/version-info --od)
         
-        echo $ES_VERSION
+        cd ../../..
+        wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
+        ls -ltr
         
           
   
