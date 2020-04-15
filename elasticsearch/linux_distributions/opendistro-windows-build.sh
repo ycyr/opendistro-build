@@ -27,14 +27,9 @@ done
 
 mv $ROOT/elasticsearch-$ES_VERSION $ROOT/$PACKAGE-$OD_VERSION
 cd $ROOT
-ls -l
 #Making zip
-#cd $TARGET_DIR
-#zip -r ./odfe-$OD_VERSION.zip ./$PACKAGE-$OD_VERSION
-#echo inside target
-#ls -ltr
-#pwd
-#cd ../..
-#echo inside root
-#ls -ltr
+zip -r odfe-$OD_VERSION.zip $PACKAGE-$OD_VERSION
+ls -l
+pwd
+
 
