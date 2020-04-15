@@ -32,9 +32,11 @@ jobs:
         
     - name: Install Plugin
       run: |
-        cd ..
+        echo "$ES_VERSION"
+        cd elasticsearch-7.6.1/bin
         ls -l
-     
-        
+        #for plugin_path in  opendistro-sql/opendistro_sql-$OD_PLUGINVERSION.zip opendistro-alerting/opendistro_alerting-$OD_PLUGINVERSION.zip opendistro-job-scheduler/opendistro-job-scheduler-$OD_PLUGINVERSION.zip opendistro-security/opendistro_security-$OD_PLUGINVERSION.zip opendistro-index-management/opendistro_index_management-$OD_PLUGINVERSION.zip
+        #do
+        #  ./        
           
   
