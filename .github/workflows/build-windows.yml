@@ -37,10 +37,9 @@ jobs:
           ./elasticsearch-plugin install --batch "https://d3g5vo6xdbdb9a.cloudfront.net/downloads/elasticsearch-plugins/$plugin_path"
         done
         
-        cd ../plugins
-        ls -ltr
+        cd ../..
+        mv elasticsearch-$ES_VERSION $PACKAGE-$OD_VERSION
+        ls -l
         
-    - name: List Installed Plugins
-      run: |
           
   
