@@ -46,4 +46,5 @@ install4j8.0.4/bin/install4jc -d EXE -D sourcedir=./$PACKAGE-$OD_VERSION,version
 
 #upload top S3
 aws s3 cp EXE/*.exe s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/odfe-windows/staging/odfe-executable/
-aws s3 cp odfe-$OD_VERSION.zip s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/odfe-windows/staging/odfe-window-zip
+aws s3 cp odfe-$OD_VERSION.zip s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/odfe-windows/staging/odfe-window-zip/
+aws cloudfront create-invalidation --distribution-id E1VG5HMIWI4SA2 --paths "/downloads/*"
