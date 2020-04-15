@@ -39,6 +39,7 @@ jobs:
         
         cd ../..
         mv elasticsearch-$ES_VERSION $PACKAGE-$OD_VERSION
+        cd $PACKAGE-$OD_VERSION
         ls -l
         
           
