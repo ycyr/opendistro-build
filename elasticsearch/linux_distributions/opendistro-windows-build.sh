@@ -2,6 +2,7 @@
 mkdir ./ws #A temporary workspace inside opendistro-build/elasticsearch/linux_distributions
 ES_VERSION=$(../bin/version-info --es)
 OD_VERSION=$(../bin/version-info --od)
+OD_PLUGINVERSION=$OD_VERSION.0
 PACKAGE=opendistroforelasticsearch
 ROOT=$(dirname "$0")/ws
 TARGET_DIR="$ROOT/Windowsfiles"
