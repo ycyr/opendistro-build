@@ -26,7 +26,9 @@ jobs:
         
         cd ../../..
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
-        ls -ltr
+        unzip elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
+        rm elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
+        ls -l
         
           
   
