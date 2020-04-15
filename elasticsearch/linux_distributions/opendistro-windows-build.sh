@@ -31,15 +31,15 @@ cd $ROOT
 zip -r odfe-$OD_VERSION.zip $PACKAGE-$OD_VERSION
 
 ##Build Exe
-wget https://download-gcdn.ej-technologies.com/install4j/install4j_unix_8_0_4.tar.gz -P $ROOT
-tar -xzf $ROOT/install4j_unix_8_0_4.tar.gz --directory $ROOT
-rm -rf $ROOT/*tar*
-aws s3 cp s3://odfe-windows/ODFE.install4j $ROOT
+wget https://download-gcdn.ej-technologies.com/install4j/install4j_unix_8_0_4.tar.gz
+tar -xzf install4j_unix_8_0_4.tar.gz
+aws s3 cp s3://odfe-windows/ODFE.install4j .
 if [ "$?" -eq "1" ]
 then
   echo "Install4j not available"
   exit 1
 fi
+pwd
 ls -ltr
 
 #Build the exe
