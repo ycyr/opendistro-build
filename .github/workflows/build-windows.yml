@@ -23,12 +23,18 @@ jobs:
         cd elasticsearch/linux_distributions
         ES_VERSION=$(../bin/version-info --es)
         OD_VERSION=$(../bin/version-info --od)
+        OD_PLUGINVERSION=$OD_VERSION.0
         
         cd ../../..
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
         unzip elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
         rm elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
+        
+    - name: Install Plugin
+      run: |
+        cd ..
         ls -l
+     
         
           
   
