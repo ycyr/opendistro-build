@@ -30,11 +30,15 @@ jobs:
         unzip elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
         rm elasticsearch-oss-$ES_VERSION-windows-x86_64.zip
         
+        #Install Plugins
+        cd elasticsearch-$ES_VERSION/bin
+        ls -l
+        
     - name: Install Plugin
       run: |
-        echo "$ES_VERSION"
-        cd elasticsearch-7.6.1/bin
-        ls -l
+        #echo "$ES_VERSION"
+        #cd elasticsearch-7.6.1/bin
+        #ls -l
         #for plugin_path in  opendistro-sql/opendistro_sql-$OD_PLUGINVERSION.zip opendistro-alerting/opendistro_alerting-$OD_PLUGINVERSION.zip opendistro-job-scheduler/opendistro-job-scheduler-$OD_PLUGINVERSION.zip opendistro-security/opendistro_security-$OD_PLUGINVERSION.zip opendistro-index-management/opendistro_index_management-$OD_PLUGINVERSION.zip
         #do
         #  ./        
