@@ -40,9 +40,9 @@ then
   exit 1
 fi
 pwd
-ls -ltr
 
 #Build the exe
-#$ROOT/install4j*/bin/install4jc -d $ROOT/EXE -D sourcedir=$ROOT/$PACKAGE-$OD_VERSION,version=$OD_VERSION --license=L-M8-AMAZON_DEVELOPMENT_CENTER_INDIA_PVT_LTD#50047687020001-3rhvir3mkx479#484b6 $ROOT/ODFE.install4j
+install4j8.0.4/bin/install4jc -d EXE -D sourcedir=./$PACKAGE-$OD_VERSION,version=$OD_VERSION --license="L-M8-AMAZON_DEVELOPMENT_CENTER_INDIA_PVT_LTD#50047687020001-3rhvir3mkx479#484b6" ./ODFE.install4j
+ls -l
 
 
