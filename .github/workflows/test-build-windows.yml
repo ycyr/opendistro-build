@@ -5,6 +5,10 @@ on:
   #  - cron: '30 10 * * *'
   repository_dispatch:
     types: [test-build-windows]
+    
+  push:
+    branches: 
+      - weicongs-amazon-ad-kibana-it-windows
 
 jobs:
 #   build-es-artifacts:
@@ -476,6 +480,8 @@ jobs:
           
       - name: run IT for AD kibana plugin
         uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_RUN_BINARY: C:\Users\runneradmin\AppData\Local\Cypress\Cache
         with:
           working-directory: kibana/plugins/anomaly-detection-kibana-plugin
           command: yarn cy:run —config baseurl=http://localhost:5601
