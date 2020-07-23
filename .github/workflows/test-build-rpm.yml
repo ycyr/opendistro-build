@@ -426,6 +426,7 @@ jobs:
 
   CleanUp-Runners:
     needs: [Test-SQL, Test-AD]
+    if: always()
     name: CleanUp-Runners
     runs-on: ubuntu-latest
     steps:
