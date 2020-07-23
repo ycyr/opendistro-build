@@ -104,6 +104,7 @@ then
     sleep 1
   done
 
+  sleep 10
   echo "All runners are offline on Git"
 fi
 
