@@ -425,7 +425,7 @@ jobs:
 #
 
   CleanUp-Runners:
-    needs: [Test-*]
+    needs: [Test-SQL, Test-AD]
     name: CleanUp-Runners
     runs-on: ubuntu-latest
     steps:
